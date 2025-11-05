@@ -11,36 +11,35 @@
   <meta name="color-scheme" content="light dark" />
   <style>
 
-    /* === Flugzeug-Icon, das beim Scrollen leicht versetzt mitläuft === */
+    html, body { position: relative; }
+
+
+  /* === Flugzeug-Icon, das beim Scrollen leicht versetzt mitläuft === */
 .bg-plane {
-  position: absolute;      /* hängt am Dokumentfluss, scrollt mit */
+  position: absolute;
   top: 40px;
   right: 60px;
-  width: 80px;
-  opacity: 0.12;           /* dezent, ggf. 0.08–0.18 testen */
-  z-index: 0;              /* hinter dem Content */
-  pointer-events: none;    /* blockiert keine Klicks */
+  width: 90px;           /* etwas größer, damit man es besser wahrnimmt */
+  opacity: 0.10;         /* dezent: 0.08–0.12; bei Bedarf justieren */
+  z-index: 1;            /* über dem BG, unter Content */
+  pointer-events: none;
+  fill: var(--text);     /* nutzt deine Theme-Textfarbe (dunkel im Light Mode, hell im Dark Mode) */
 }
 
 .bg-plane.parallax {
   will-change: transform;
-  transition: transform 0.05s linear; /* glättet minimal */
+  transition: transform 0.05s linear;
 }
 
-/* Stelle sicher, dass dein eigentlicher Content über dem Icon liegt */
-main, section, header, footer {
-  position: relative;
-  z-index: 1;
-}
+/* Content sicher darüber halten */
+main, section, header, footer { position: relative; z-index: 2; }
 
-/* Optional: auf kleineren Screens kleiner & näher an den Rand */
+/* Mobile: kleiner & näher an den Rand */
 @media (max-width: 640px) {
-  .bg-plane { 
-    top: 24px; 
-    right: 24px; 
-    width: 56px;
-  }
+  .bg-plane { top: 24px; right: 24px; width: 64px; opacity: 0.08; }
 }
+
+
 
     :root {
         --bg: #0b1b14;          /* dunkles Grünblau */
