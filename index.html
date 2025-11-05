@@ -10,6 +10,38 @@
   <meta property="og:type" content="website" />
   <meta name="color-scheme" content="light dark" />
   <style>
+
+    /* === Flugzeug-Icon, das beim Scrollen leicht versetzt mitläuft === */
+.bg-plane {
+  position: absolute;      /* hängt am Dokumentfluss, scrollt mit */
+  top: 40px;
+  right: 60px;
+  width: 80px;
+  opacity: 0.12;           /* dezent, ggf. 0.08–0.18 testen */
+  z-index: 0;              /* hinter dem Content */
+  pointer-events: none;    /* blockiert keine Klicks */
+}
+
+.bg-plane.parallax {
+  will-change: transform;
+  transition: transform 0.05s linear; /* glättet minimal */
+}
+
+/* Stelle sicher, dass dein eigentlicher Content über dem Icon liegt */
+main, section, header, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: auf kleineren Screens kleiner & näher an den Rand */
+@media (max-width: 640px) {
+  .bg-plane { 
+    top: 24px; 
+    right: 24px; 
+    width: 56px;
+  }
+}
+
     :root {
         --bg: #0b1b14;          /* dunkles Grünblau */
         --bg-elev: #11251c;     /* leicht heller für Karten */
@@ -142,6 +174,17 @@
   </style>
 </head>
 <body>
+
+  
+  <!-- Flugzeug-Icon (scrollt mit, Parallax kommt per JS) -->
+  <svg class="bg-plane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="white" aria-hidden="true">
+    <!-- Platzhalter-Pfad; gern gegen dein Wunsch-SVG tauschen -->
+    <path d="M2.5 19l19-7-19-7v5l14 2-14 2v5z"></path>
+  </svg>
+
+  <!-- Ab hier dein bestehender Inhalt -->
+
   <a href="#content" class="skip">Skip to content</a>
   <header>
     <div class="container nav">
@@ -492,6 +535,26 @@
     }
   });
 </script>
+
+  <script>
+  // Parallax: bewegt das Flugzeug etwas langsamer als den Scroll
+  const plane = document.querySelector('.bg-plane');
+  if (plane) {
+    // Klasse aktivieren (für will-change/transition)
+    plane.classList.add('parallax');
+
+    // Wie stark der Versatz sein soll (0.2 = subtil)
+    const factor = 0.2;
+
+    // Performant: nur transform anpassen
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY * factor;
+      plane.style.transform = `translateY(${y}px)`;
+    }, { passive: true });
+  }
+</script>
+
+
 
 </body>
 </html>
