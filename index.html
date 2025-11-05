@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siefermann Simon – Introduction</title>
+  <meta name="description" content="One-page application by Simon Siefermann – Profile, skills, experience, projects, and contact." />
+  <meta property="og:title" content="Simon Siefermann – Application" />
+  <meta property="og:description" content="Profile, skills, experience, projects, and contact." />
+  <meta property="og:type" content="website" />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root {
+        --bg: #0b1b14;          /* dunkles Grünblau */
+        --bg-elev: #11251c;     /* leicht heller für Karten */
+        --text: #e8f5e9;        /* fast weiß mit grünem Stich */
+        --muted: #a7c7ad;       /* Sekundärtext */
+        --brand: #34d399;       /* Hauptgrün (Mintgrün) */
+        --brand-2: #16a34a;     /* kräftiges Grün */
+        --card: #10271e;        /* Kartenhintergrund */
+        --border: #1e3a2a;      /* Linien */
+        --shadow: 0 10px 30px rgba(0,0,0,.3)
+      --radius: 16px;
+      --maxw: 1100px;
+      --pad: 20px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f8fafc; --bg-elev:#ffffff; --text:#0f172a; --muted:#475569; --card:#ffffff; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,6,23,.1);} 
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif; background:var(--bg); color:var(--text)}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad)}
+    .btn{display:inline-block; padding:12px 18px; border-radius:999px; border:1px solid var(--border); background:transparent; color:var(--text); transition:.2s; box-shadow:none}
+    .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .btn.primary{background:var(--brand); color:#0b1020; border-color:transparent; font-weight:700}
+    .btn.ghost{background:transparent}
+    .tag{display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:999px; font-size:.9rem; color:var(--muted); margin:6px 6px 0 0}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .grid{display:grid; gap:20px}
+    .grid-2{grid-template-columns:1fr}
+    @media(min-width:900px){.grid-2{grid-template-columns:1.2fr .8fr}}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(120%) blur(6px); background:color-mix(in oklab, var(--bg), transparent 25%); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
+    .brand .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    nav ul{list-style:none; display:flex; gap:14px; margin:0; padding:0}
+    nav a{display:inline-block; padding:8px 12px; border-radius:999px}
+    nav a:hover{background:var(--bg-elev)}
+    .menu-btn{display:none}
+    @media(max-width:760px){
+      nav ul{position:fixed; right:12px; top:72px; background:var(--bg-elev); border:1px solid var(--border); padding:10px; border-radius:12px; flex-direction:column; display:none}
+      nav ul.open{display:flex}
+      .menu-btn{display:inline-flex; gap:8px; align-items:center}
+    }
+
+    /* Hero */
+    .hero{padding:70px 0 30px 0}
+    .hero .wrap{display:grid; gap:30px; grid-template-columns:1fr}
+    .hero h1{font-size:clamp(2rem,4vw,3rem); margin:.2rem 0}
+    .lead{color:var(--muted); font-size:1.1rem; max-width:60ch}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+    .avatar {
+  width: clamp(150px, 25vw, 260px);
+  height: clamp(150px, 25vw, 260px);
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+
+    @media (max-width: 900px) {
+  .avatar {
+    width: clamp(200px, 45vw, 280px);
+    height: clamp(200px, 45vw, 280px);
+  }
+}
+
+
+/* Mobile-first: Bild über dem Text */
+.hero .wrap {
+  display: flex;
+  flex-direction: column;     /* untereinander */
+  align-items: center;        /* zentriert */
+  gap: 30px;
+}
+
+.hero .right {
+  order: -1;                  /* Bild kommt VOR dem Text */
+  margin-bottom: 1.5rem;      /* Abstand unter dem Bild */
+}
+
+/* Desktop: Text links, Bild rechts */
+@media (min-width: 900px) {
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;  /* zwei Spalten */
+    align-items: center;
+    gap: 30px;
+  }
+
+  .hero .right {
+    order: 0;                 /* zurücksetzen: Bild rechts neben Text */
+    margin-bottom: 0;
+    justify-self: end;        /* Bild an den rechten Rand */
+  }
+}
+
+
+
+    /* Sections */
+    section{padding:40px 0}
+    h2{font-size:1.5rem; margin:0 0 12px}
+    .muted{color:var(--muted)}
+
+    /* Timeline */
+    .timeline{position:relative; margin-left:10px}
+    .timeline:before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--border)}
+    .t-item{position:relative; padding-left:28px; margin:18px 0}
+    .t-item:before{content:""; position:absolute; left:0; top:6px; width:14px; height:14px; border-radius:50%; background:var(--brand); box-shadow:0 0 0 3px color-mix(in oklab, var(--brand), transparent 60%)}
+    .t-role{font-weight:700}
+    .t-meta{font-size:.95rem; color:var(--muted)}
+
+    /* Cards */
+    .cards{display:grid; grid-template-columns:1fr; gap:16px}
+    @media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+    .card .c-body{padding:16px}
+    .card img{width:100%; height:160px; object-fit:cover; border-top-left-radius:var(--radius); border-top-right-radius:var(--radius); border-bottom:1px solid var(--border)}
+    .card h3{margin:6px 0}
+
+    /* Footer */
+    footer{padding:30px 0 60px; border-top:1px solid var(--border); color:var(--muted); font-size:.95rem}
+
+    /* Print CV */
+    @media print{ nav, .actions .btn.primary, .menu-btn{display:none !important} body{background:#fff; color:#000} .card, header{box-shadow:none}}
+
+    /* Skip link */
+    .skip{position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{position:static; width:auto; height:auto; padding:8px; background:var(--brand); color:#081020; border-radius:8px}
+  </style>
+</head>
+<body>
+  <a href="#content" class="skip">Skip to content</a>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="Start">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Simon Siefermann</span>
+      </div>
+      <button class="menu-btn btn ghost" aria-label="Toggle menu" aria-expanded="false">☰ Menu</button>
+      <nav aria-label="Main navigation">
+        <ul id="navlist">
+
+          <li><a href="#profil">Profile</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#erfahrung">Professional Experience</a></li>
+          <li><a href="#schule">Education</a></li>
+          <li><a href="#projekte">Projects</a></li>
+          <li><a href="#kontakt">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <p class="muted">Let me <strong>introduce</strong> myself</p>
+          <h1>Hi, I am <span style="color:var(--brand)">Simon</span> – a Business Engineering Student aspiring to work in the <span style="color:var(--brand)">aviation industry</span></h1>
+          <p class="lead">As a Business Engineering student, I am on a clear path of growth, deepening my skills in process and project management while gaining practical experience in the energy sector. I am driven by curiosity and a hands-on approach, and I am building a solid foundation to take on bigger challenges and deliver impactful results.</p>
+          <div class="actions">
+            <a class="btn primary" href="#kontakt">Contact me</a>
+            <a class="btn" href="assets/2025-10_CV_Siefermann_Simon.pdf" target="_blank" rel="noopener"> 📄 View CV (PDF)</a>
+            <a class="btn ghost" href="#projekte">View projects</a>
+          </div>
+        </div>
+        <div class="right" aria-hidden="true">
+          <img class="avatar" src="assets/simon_sqr.jpg" alt="Profile photo" onerror="this.style.display='none'" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFIL -->
+    <section id="profil">
+      <div class="container grid grid-2">
+        <div>
+          <h2>Profile</h2>
+          <p>My diverse background in project management, sales, social media marketing, customer service, content creation, and e-commerce product management has given me the skills to adapt and contribute to a variety of teams.</p>
+          <p class="muted">Location: Baden · Remote/hybrid possible · Available from: One-month notice period</p>
+          <div style="margin-top:10px">
+            <span class="tag">#Agile</span>
+            <span class="tag">#Customer-centric</span>
+            <span class="tag">#Hands-on</span>
+          </div>
+        </div>
+        <div class="card" role="note" aria-label="Strengths">
+          <div class="c-body">
+            <h3 style="margin-top:0">Summary of skills</h3>
+            <ul>
+              <li>Process design & optimization (BPMN 2.0)</li>
+              <li>Project management & controlling (Waterfall, Agile/Scrum)</li>
+              <li>Business analysis, budgeting & reporting</li>
+              <li>Data analysis & scripting (Python, HTML, CSS)</li>
+              <li>Marketing & content management (Social Media, E-Commerce)</li>
+              <li>Creative tools: Adobe Creative Cloud, Canva, Adobe Analytics</li>
+              <li>Advanced proficiency in M365</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <h2>Skills</h2>
+    <p class="muted">  A selection of my key technical and interpersonal skills.</p>
+        <!-- HARD SKILLS -->
+          <h3 style="margin-top:14px">Hard Skills</h3>
+          <div>
+            <span class="tag">Process Design</span>
+            <span class="tag">Process Optimization</span>
+            <span class="tag">BPMN 2.0</span>
+          
+            <span class="tag">Project Management</span>
+            <span class="tag">Project Controlling</span>
+            <span class="tag">Waterfall</span>
+            <span class="tag">Agile</span>
+            <span class="tag">Scrum</span>
+          
+            <span class="tag">Business Analysis</span>
+            <span class="tag">Budgeting</span>
+            <span class="tag">Reporting</span>
+          
+            <span class="tag">Data Analysis</span>
+            <span class="tag">Scripting</span>
+            <span class="tag">Python</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+          
+            <span class="tag">Marketing</span>
+            <span class="tag">Content Management</span>
+            <span class="tag">Social Media</span>
+            <span class="tag">E-Commerce</span>
+          
+            <span class="tag">Adobe Creative Cloud</span>
+            <span class="tag">Adobe Analytics</span>
+            <span class="tag">Canva</span>
+          
+            <span class="tag">Microsoft 365 (Advanced)</span>
+          </div>
+          
+          <!-- SOFT SKILLS -->
+          <h3 style="margin-top:18px">Soft Skills</h3>
+          <div>
+            <span class="tag">Analytical Thinking</span>
+            <span class="tag">Conceptual Thinking</span>
+            <span class="tag">Fast Learner</span>
+            <span class="tag">Quick Grasp</span>
+            <span class="tag">Efficient</span>
+            <span class="tag">Structured Work</span>
+            <span class="tag">Communication</span>
+            <span class="tag">Teamwork</span>
+            <span class="tag">Networking</span>
+            <span class="tag">Solution-Oriented</span>
+            <span class="tag">Reliability</span>
+            <span class="tag">Proactive</span>
+            <span class="tag">Ownership</span>
+            <span class="tag">Organization</span>
+            <span class="tag">Multitasking</span>
+            <span class="tag">Adaptability</span>
+            <span class="tag">Stress Resilience</span>
+            <span class="tag">Detail-Oriented</span>
+            <span class="tag">Big-Picture Thinking</span>
+            <span class="tag">Self-Motivated</span>
+            <span class="tag">Continuous Improvement</span>
+          </div>
+
+      </div>
+    </section>
+
+    <!-- ERFAHRUNG (Timeline) -->
+    <section id="erfahrung">
+      <div class="container">
+        <h2>Professional experience</h2>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-role">Junior Process and Project Assistant @ Regionalwerke AG Baden</div>
+            <div class="t-meta">08/2025 – now · Baden</div>
+            <ul>
+              <li>Recording, defining, and optimizing BPMN 2.0 processes with key stakeholders,
+focusing on core processes in electricity, heating, and water supply.</li>
+              <li>Managing and maintaining the document management system (DMS), including
+document updates, user support, and tool optimization.</li>
+              <li>Onboarding and training new employees.</li>
+                <li>Providing administrative support and assistance in ongoing projects.</li>
+              
+            </ul>
+          </div>
+          <div class="t-item">
+            <div class="t-role">Junior Project Manager B2B / Channel Marketing Manager @ Brack.Alltron AG (formerly Competec Group)</div>
+            <div class="t-meta">06/2024 – 06/2025 · Mägenwil</div>
+            <ul>
+              <li>Planned and budgeted hospitality events, coordinating sales focuses and marketing campaigns with key departments.</li>
+              <li>Conducted sales analyses and organized offsites, workshops, and training sessions.</li>
+              <li>Supported team operations through OKR coordination and administrative assistance.</li>
+            </ul>
+          </div>
+          
+          <div class="t-item">
+            <div class="t-role">(Junior) Social Media & Community Manager @ Brack.Alltron AG</div>
+            <div class="t-meta">08/2021 – 05/2024 · Mägenwil</div>
+            <ul>
+              <li>Managed community engagement and customer service across all group social media channels.</li>
+              <li>Developed strategies for new platforms and expanded the reach of existing networks.</li>
+              <li>Planned, executed, and analyzed organic and paid social media campaigns, including budget control and reporting in Adobe Analytics.</li>
+              <li>Supported strategic projects and represented the brand at events through on-site reporting and content creation.</li>
+            </ul>
+          </div>
+          
+          <div class="t-item">
+            <div class="t-role">Mediamatician EFZ (Apprenticeship) @ Brack.Alltron AG</div>
+            <div class="t-meta">08/2017 – 07/2021 · Mägenwil</div>
+            <ul>
+              <li>Provided technical support and customer service, handled warranty cases, and assembled custom PCs.</li>
+              <li>Managed sales via phone, email, pickup counter, and showroom, supporting retail and key account operations.</li>
+              <li>Created and maintained landing pages and newsletters, contributing to web publishing and content management.</li>
+              <li>Gained experience in purchasing and product management in the food sector, including assortment development and cross-functional projects.</li>
+            </ul>
+          </div>
+
+          <!-- weitere Stationen kopieren -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHULE -->
+<section id="schule">
+  <div class="container">
+    <h2>Education</h2>
+    <p class="muted">
+      Studies, further education, and vocational training.
+    </p>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-role">Business Engineering · Bachelor of Science @ FHNW</div>
+        <div class="t-meta">09/2023 – 08/2027 · Brugg/Windisch</div>
+        <ul>
+          <li>Comprehensive foundation in business administration, engineering, and information technology.</li>
+          <li>Proficient in project management methodologies.</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-role">Online Marketing Manager · School certificate @ Handelsschule KV Aarau</div>
+        <div class="t-meta">11/2021 – 07/2022 · Aarau</div>
+        <ul>
+          <li>Developed an online marketing concept for the vocational training program at BRACK, including personas, social media, and email marketing.</li>
+          <li>Completed theoretical coursework in digital and online marketing fundamentals.</li>
+        </ul>
+      </div>
+
+       <div class="t-item">
+        <div class="t-role">Mediamatician · Federal VET Diploma & Professional Maturity @ Handelsschule KV Aarau, Berufsschule Aarau</div>
+        <div class="t-meta">08/2017 – 07/2021 · Aarau</div>
+        <ul>
+          <li>Vocational training in business administration, IT, and design.</li>
+          <li>Hands-on experience in administration, digital media, and web technologies.</li>
+        </ul>
+      </div>
+      <!-- Weitere Stationen kopieren -->
+    </div>
+  </div>
+</section>
+
+
+    <!-- PROJEKTE -->
+    <section id="projekte">
+      <div class="container">
+        <h2>A selection of projects</h2>
+        <div class="cards">
+          <article class="card">
+            <img src="assets/projekt1.jpg" alt="Project 1 screenshot" onerror="this.style.display='none'">
+            <div class="c-body">
+              <p style="color:var(--muted); font-size:0.95rem; margin-bottom:4px;">
+                For <strong>BRUGG Pipes, Kleindöttingen</strong>
+              </p>
+              <h3>InnoCON</h3>
+              <p class="muted">Market analysis and development of recommendations for action with approaches and solutions to strengthen the competitiveness and market presence of the INDUCON pipe connection solution.</p>
+              <div>
+                <span class="tag">Market Research</span>
+                <span class="tag">SWOT</span>
+                <span class="tag">Competitor Analysis</span>
+              </div>
+              <div style="margin-top:10px">
+                <a class="btn" href="https://www.linkedin.com/posts/simon-siefermann_fhnw-wirtschaftsingenieurwesen-bruggpipes-activity-7283383144458645504-lSOv" target="_blank">View on LinkedIn</a>
+                
+              </div>
+            </div>
+          </article>
+          
+          <article class="card">
+            <img src="assets/projekt3.jpg" alt="Project 3 screenshot" onerror="this.style.display='none'">
+            <div class="c-body">
+               <p style="color:var(--muted); font-size:0.95rem; margin-bottom:4px;">
+                For <strong>Güdel AG, Langenthal</strong>
+              </p>
+              <h3>SmartLog</h3>
+              <p class="muted">AI potential analysis for core logistics processes</p>
+              <div>
+                <span class="tag">Artificial Intelligence</span>
+                <span class="tag">BPMN 2.0</span>
+                <span class="tag">Process Optimization</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+      <div class="container grid grid-2">
+        <div>
+          <h2>Contact</h2>
+          <p>I look forward to hearing from you or having a brief exchange.</p>
+          <p class="muted">E-mail or LinkedIn.</p>
+          <div class="actions" style="margin-top:8px">
+            <a class="btn primary" href="mailto:simon@siefermann.ch?subject=Kurzer%20Austausch">Send e-mail</a>
+            <a class="btn" href="https://www.linkedin.com/in/simon-siefermann/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://wa.me/41764509402" target="_blank" rel="noopener"> 💬 Message me on WhatsApp</a>
+            <a class="btn ghost" href="tel:+41764509402">Call me on +76 450 94 02</a>
+            
+          </div>
+        </div>
+        <div class="card" role="note" aria-label="Details">
+          <div class="c-body">
+            <h3 style="margin-top:0">Details</h3>
+            <ul>
+              <li>Location: Baden, Switzerland</li>
+              <li>Languages: German, English, French</li>
+              <li>Availability: One-month notice period</li>
+            </ul>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="y"></span> Simon Siefermann · <a href="#profil">Back to the top</a></div>
+      <div class="muted" style="margin-top:8px"></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+  const menuBtn = document.querySelector('.menu-btn');
+  const navList = document.querySelector('#navlist');
+
+  function setExpanded() {
+    menuBtn.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
+  }
+
+  // Menü öffnen/schließen bei Button-Klick
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navList.classList.toggle('open');
+    setExpanded();
+  });
+
+  // Menü einklappen, wenn man einen Menüpunkt klickt
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      setExpanded();
+    });
+  });
+
+  // Klick außerhalb -> Menü schließen
+  document.addEventListener('click', (e) => {
+    if (navList.classList.contains('open') &&
+        !navList.contains(e.target) &&
+        !menuBtn.contains(e.target)) {
+      navList.classList.remove('open');
+      setExpanded();
+    }
+  });
+
+  // ESC-Taste schließt das Menü
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navList.classList.contains('open')) {
+      navList.classList.remove('open');
+      setExpanded();
+    }
+  });
+</script>
+
+</body>
+</html>
+
