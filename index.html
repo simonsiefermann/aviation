@@ -19,7 +19,7 @@
         --brand-2: #16a34a;     /* kräftiges Grün */
         --card: #10271e;        /* Kartenhintergrund */
         --border: #1e3a2a;      /* Linien */
-        --shadow: 0 10px 30px rgba(0,0,0,.3)
+        --shadow: 0 10px 30px rgba(0,0,0,.3);
       --radius: 16px;
       --maxw: 1100px;
       --pad: 20px;
@@ -47,7 +47,8 @@
     header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(120%) blur(6px); background:color-mix(in oklab, var(--bg), transparent 25%); border-bottom:1px solid var(--border)}
     .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
     .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
-    .brand .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    /* .brand .dot bleibt ungenutzt; Flugzeug-Icon ist Inline-SVG */
+
     nav ul{list-style:none; display:flex; gap:14px; margin:0; padding:0}
     nav a{display:inline-block; padding:8px 12px; border-radius:999px}
     nav a:hover{background:var(--bg-elev)}
@@ -65,52 +66,49 @@
     .lead{color:var(--muted); font-size:1.1rem; max-width:60ch}
     .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
     .avatar {
-  width: clamp(150px, 25vw, 260px);
-  height: clamp(150px, 25vw, 260px);
-  border-radius: 50%;
-  border: 3px solid var(--border);
-  object-fit: cover;
-  box-shadow: 0 4px 20px rgba(0,0,0,.3);
-}
+      width: clamp(150px, 25vw, 260px);
+      height: clamp(150px, 25vw, 260px);
+      border-radius: 50%;
+      border: 3px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
 
     @media (max-width: 900px) {
-  .avatar {
-    width: clamp(200px, 45vw, 280px);
-    height: clamp(200px, 45vw, 280px);
-  }
-}
+      .avatar {
+        width: clamp(200px, 45vw, 280px);
+        height: clamp(200px, 45vw, 280px);
+      }
+    }
 
+    /* Mobile-first: Bild über dem Text */
+    .hero .wrap {
+      display: flex;
+      flex-direction: column;     /* untereinander */
+      align-items: center;        /* zentriert */
+      gap: 30px;
+    }
 
-/* Mobile-first: Bild über dem Text */
-.hero .wrap {
-  display: flex;
-  flex-direction: column;     /* untereinander */
-  align-items: center;        /* zentriert */
-  gap: 30px;
-}
+    .hero .right {
+      order: -1;                  /* Bild kommt VOR dem Text */
+      margin-bottom: 1.5rem;      /* Abstand unter dem Bild */
+    }
 
-.hero .right {
-  order: -1;                  /* Bild kommt VOR dem Text */
-  margin-bottom: 1.5rem;      /* Abstand unter dem Bild */
-}
+    /* Desktop: Text links, Bild rechts */
+    @media (min-width: 900px) {
+      .hero .wrap {
+        display: grid;
+        grid-template-columns: 1.2fr .8fr;  /* zwei Spalten */
+        align-items: center;
+        gap: 30px;
+      }
 
-/* Desktop: Text links, Bild rechts */
-@media (min-width: 900px) {
-  .hero .wrap {
-    display: grid;
-    grid-template-columns: 1.2fr .8fr;  /* zwei Spalten */
-    align-items: center;
-    gap: 30px;
-  }
-
-  .hero .right {
-    order: 0;                 /* zurücksetzen: Bild rechts neben Text */
-    margin-bottom: 0;
-    justify-self: end;        /* Bild an den rechten Rand */
-  }
-}
-
-
+      .hero .right {
+        order: 0;                 /* zurücksetzen: Bild rechts neben Text */
+        margin-bottom: 0;
+        justify-self: end;        /* Bild an den rechten Rand */
+      }
+    }
 
     /* Sections */
     section{padding:40px 0}
@@ -147,14 +145,22 @@
   <a href="#content" class="skip">Skip to content</a>
   <header>
     <div class="container nav">
-      <div class="brand" aria-label="Start">
-        <span class="dot" aria-hidden="true"></span>
+      <div class="brand" aria-label="Home">
+        <!-- Flugzeug-Icon (ersetzt den Punkt) -->
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(15deg)">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--brand)"/>
+              <stop offset="100%" stop-color="var(--brand-2)"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#g)" d="M2 13l7-2 3-8 2 0-1 8 7 3-1.5 1-5.5-1-3 6-1.5 0 1-6-5 1z"/>
+        </svg>
         <span>Simon Siefermann</span>
       </div>
       <button class="menu-btn btn ghost" aria-label="Toggle menu" aria-expanded="false">☰ Menu</button>
       <nav aria-label="Main navigation">
         <ul id="navlist">
-
           <li><a href="#profil">Profile</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#erfahrung">Professional Experience</a></li>
@@ -172,8 +178,8 @@
       <div class="container wrap">
         <div>
           <p class="muted">Let me <strong>introduce</strong> myself</p>
-          <h1>Hi, I am <span style="color:var(--brand)">Simon</span> – a Business Engineering Student aspiring to work in the <span style="color:var(--brand)">aviation industry</span></h1>
-          <p class="lead">As a Business Engineering student, I am on a clear path of growth, deepening my skills in process and project management while gaining practical experience in the energy sector. I am driven by curiosity and a hands-on approach, and I am building a solid foundation to take on bigger challenges and deliver impactful results.</p>
+          <h1>Hi, I am <span style="color:var(--brand)">Simon</span> – a Business Engineering student aspiring to work in the <span style="color:var(--brand)">aviation industry</span></h1>
+          <p class="lead">As a Business Engineering student, I’m on a clear path of growth, deepening my skills in process and project management while gaining practical experience in the energy sector. Curiosity and a hands-on mindset drive me to take on bigger challenges and deliver measurable results.</p>
           <div class="actions">
             <a class="btn primary" href="#kontakt">Contact me</a>
             <a class="btn" href="assets/2025-10_CV_Siefermann_Simon.pdf" target="_blank" rel="noopener"> 📄 View CV (PDF)</a>
@@ -191,8 +197,8 @@
       <div class="container grid grid-2">
         <div>
           <h2>Profile</h2>
-          <p>My diverse background in project management, sales, social media marketing, customer service, content creation, and e-commerce product management has given me the skills to adapt and contribute to a variety of teams.</p>
-          <p class="muted">Location: Baden · Remote/hybrid possible · Available from: One-month notice period</p>
+          <p>My background spans project management, sales, social media, customer service, content creation, and e-commerce product management—helping me adapt quickly and contribute across teams.</p>
+          <p class="muted">Location: Baden · Remote/hybrid possible · Available: one-month notice</p>
           <div style="margin-top:10px">
             <span class="tag">#Agile</span>
             <span class="tag">#Customer-centric</span>
@@ -220,96 +226,86 @@
     <section id="skills">
       <div class="container">
         <h2>Skills</h2>
-    <p class="muted">  A selection of my key technical and interpersonal skills.</p>
+        <p class="muted">A selection of my key technical and interpersonal skills.</p>
         <!-- HARD SKILLS -->
-          <h3 style="margin-top:14px">Hard Skills</h3>
-          <div>
-            <span class="tag">Process Design</span>
-            <span class="tag">Process Optimization</span>
-            <span class="tag">BPMN 2.0</span>
-          
-            <span class="tag">Project Management</span>
-            <span class="tag">Project Controlling</span>
-            <span class="tag">Waterfall</span>
-            <span class="tag">Agile</span>
-            <span class="tag">Scrum</span>
-          
-            <span class="tag">Business Analysis</span>
-            <span class="tag">Budgeting</span>
-            <span class="tag">Reporting</span>
-          
-            <span class="tag">Data Analysis</span>
-            <span class="tag">Scripting</span>
-            <span class="tag">Python</span>
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-          
-            <span class="tag">Marketing</span>
-            <span class="tag">Content Management</span>
-            <span class="tag">Social Media</span>
-            <span class="tag">E-Commerce</span>
-          
-            <span class="tag">Adobe Creative Cloud</span>
-            <span class="tag">Adobe Analytics</span>
-            <span class="tag">Canva</span>
-          
-            <span class="tag">Microsoft 365 (Advanced)</span>
-          </div>
-          
-          <!-- SOFT SKILLS -->
-          <h3 style="margin-top:18px">Soft Skills</h3>
-          <div>
-            <span class="tag">Analytical Thinking</span>
-            <span class="tag">Conceptual Thinking</span>
-            <span class="tag">Fast Learner</span>
-            <span class="tag">Quick Grasp</span>
-            <span class="tag">Efficient</span>
-            <span class="tag">Structured Work</span>
-            <span class="tag">Communication</span>
-            <span class="tag">Teamwork</span>
-            <span class="tag">Networking</span>
-            <span class="tag">Solution-Oriented</span>
-            <span class="tag">Reliability</span>
-            <span class="tag">Proactive</span>
-            <span class="tag">Ownership</span>
-            <span class="tag">Organization</span>
-            <span class="tag">Multitasking</span>
-            <span class="tag">Adaptability</span>
-            <span class="tag">Stress Resilience</span>
-            <span class="tag">Detail-Oriented</span>
-            <span class="tag">Big-Picture Thinking</span>
-            <span class="tag">Self-Motivated</span>
-            <span class="tag">Continuous Improvement</span>
-          </div>
+        <h3 style="margin-top:14px">Hard Skills</h3>
+        <div>
+          <span class="tag">Process Design</span>
+          <span class="tag">Process Optimization</span>
+          <span class="tag">BPMN 2.0</span>
+          <span class="tag">Project Management</span>
+          <span class="tag">Project Controlling</span>
+          <span class="tag">Waterfall</span>
+          <span class="tag">Agile</span>
+          <span class="tag">Scrum</span>
+          <span class="tag">Business Analysis</span>
+          <span class="tag">Budgeting</span>
+          <span class="tag">Reporting</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Scripting</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Marketing</span>
+          <span class="tag">Content Management</span>
+          <span class="tag">Social Media</span>
+          <span class="tag">E-Commerce</span>
+          <span class="tag">Adobe Creative Cloud</span>
+          <span class="tag">Adobe Analytics</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Microsoft 365 (Advanced)</span>
+        </div>
 
+        <!-- SOFT SKILLS -->
+        <h3 style="margin-top:18px">Soft Skills</h3>
+        <div>
+          <span class="tag">Analytical Thinking</span>
+          <span class="tag">Conceptual Thinking</span>
+          <span class="tag">Fast Learner</span>
+          <span class="tag">Efficient</span>
+          <span class="tag">Structured Work</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Teamwork</span>
+          <span class="tag">Networking</span>
+          <span class="tag">Solution-Oriented</span>
+          <span class="tag">Reliability</span>
+          <span class="tag">Proactive</span>
+          <span class="tag">Ownership</span>
+          <span class="tag">Organization</span>
+          <span class="tag">Multitasking</span>
+          <span class="tag">Adaptability</span>
+          <span class="tag">Stress Resilience</span>
+          <span class="tag">Detail-Oriented</span>
+          <span class="tag">Big-Picture Thinking</span>
+          <span class="tag">Self-Motivated</span>
+          <span class="tag">Continuous Improvement</span>
+        </div>
       </div>
     </section>
 
     <!-- ERFAHRUNG (Timeline) -->
     <section id="erfahrung">
       <div class="container">
-        <h2>Professional experience</h2>
+        <h2>Professional Experience</h2>
         <div class="timeline">
           <div class="t-item">
             <div class="t-role">Junior Process and Project Assistant @ Regionalwerke AG Baden</div>
             <div class="t-meta">08/2025 – now · Baden</div>
             <ul>
-              <li>Recording, defining, and optimizing BPMN 2.0 processes with key stakeholders,
-focusing on core processes in electricity, heating, and water supply.</li>
-              <li>Managing and maintaining the document management system (DMS), including
-document updates, user support, and tool optimization.</li>
-              <li>Onboarding and training new employees.</li>
-                <li>Providing administrative support and assistance in ongoing projects.</li>
-              
+              <li>Recorded, defined, and optimized BPMN 2.0 processes with key stakeholders—focused on core processes in electricity, heating, and water supply.</li>
+              <li>Managed the document management system (DMS): updates, user support, and tool optimization.</li>
+              <li>Onboarded and trained new employees.</li>
+              <li>Provided administrative support for ongoing projects.</li>
             </ul>
           </div>
+
           <div class="t-item">
             <div class="t-role">Junior Project Manager B2B / Channel Marketing Manager @ Brack.Alltron AG (formerly Competec Group)</div>
             <div class="t-meta">06/2024 – 06/2025 · Mägenwil</div>
             <ul>
-              <li>Planned and budgeted hospitality events, coordinating sales focuses and marketing campaigns with key departments.</li>
-              <li>Conducted sales analyses and organized offsites, workshops, and training sessions.</li>
-              <li>Supported team operations through OKR coordination and administrative assistance.</li>
+              <li>Planned and budgeted hospitality events; coordinated sales focuses and marketing campaigns with key departments.</li>
+              <li>Conducted sales analyses; organized offsites, workshops, and trainings.</li>
+              <li>Supported team operations via OKR coordination and administrative assistance.</li>
             </ul>
           </div>
           
@@ -317,10 +313,10 @@ document updates, user support, and tool optimization.</li>
             <div class="t-role">(Junior) Social Media & Community Manager @ Brack.Alltron AG</div>
             <div class="t-meta">08/2021 – 05/2024 · Mägenwil</div>
             <ul>
-              <li>Managed community engagement and customer service across all group social media channels.</li>
-              <li>Developed strategies for new platforms and expanded the reach of existing networks.</li>
-              <li>Planned, executed, and analyzed organic and paid social media campaigns, including budget control and reporting in Adobe Analytics.</li>
-              <li>Supported strategic projects and represented the brand at events through on-site reporting and content creation.</li>
+              <li>Managed community engagement and customer service across group social channels.</li>
+              <li>Developed strategies for new platforms and scaled existing networks.</li>
+              <li>Planned, executed, and analyzed organic/paid campaigns; budgeting and reporting in Adobe Analytics.</li>
+              <li>Supported strategic projects; represented the brand at events with on-site reporting and content creation.</li>
             </ul>
           </div>
           
@@ -328,57 +324,51 @@ document updates, user support, and tool optimization.</li>
             <div class="t-role">Mediamatician EFZ (Apprenticeship) @ Brack.Alltron AG</div>
             <div class="t-meta">08/2017 – 07/2021 · Mägenwil</div>
             <ul>
-              <li>Provided technical support and customer service, handled warranty cases, and assembled custom PCs.</li>
-              <li>Managed sales via phone, email, pickup counter, and showroom, supporting retail and key account operations.</li>
-              <li>Created and maintained landing pages and newsletters, contributing to web publishing and content management.</li>
-              <li>Gained experience in purchasing and product management in the food sector, including assortment development and cross-functional projects.</li>
+              <li>Handled technical support, customer service, warranty cases; assembled custom PCs.</li>
+              <li>Managed sales via phone, email, pickup counter, and showroom; supported retail and key account ops.</li>
+              <li>Created/maintained landing pages and newsletters; contributed to web publishing and content management.</li>
+              <li>Gained experience in purchasing and product management (food), including assortment development and cross-functional projects.</li>
             </ul>
           </div>
-
-          <!-- weitere Stationen kopieren -->
         </div>
       </div>
     </section>
 
     <!-- SCHULE -->
-<section id="schule">
-  <div class="container">
-    <h2>Education</h2>
-    <p class="muted">
-      Studies, further education, and vocational training.
-    </p>
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-role">Business Engineering · Bachelor of Science @ FHNW</div>
-        <div class="t-meta">09/2023 – 08/2027 · Brugg/Windisch</div>
-        <ul>
-          <li>Comprehensive foundation in business administration, engineering, and information technology.</li>
-          <li>Proficient in project management methodologies.</li>
-        </ul>
-      </div>
+    <section id="schule">
+      <div class="container">
+        <h2>Education</h2>
+        <p class="muted">Studies, further education, and vocational training.</p>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-role">Business Engineering · Bachelor of Science @ FHNW</div>
+            <div class="t-meta">09/2023 – 08/2027 · Brugg/Windisch</div>
+            <ul>
+              <li>Comprehensive foundation in business administration, engineering, and information technology.</li>
+              <li>Proficient in project management methodologies.</li>
+            </ul>
+          </div>
 
-      <div class="t-item">
-        <div class="t-role">Online Marketing Manager · School certificate @ Handelsschule KV Aarau</div>
-        <div class="t-meta">11/2021 – 07/2022 · Aarau</div>
-        <ul>
-          <li>Developed an online marketing concept for the vocational training program at BRACK, including personas, social media, and email marketing.</li>
-          <li>Completed theoretical coursework in digital and online marketing fundamentals.</li>
-        </ul>
-      </div>
+          <div class="t-item">
+            <div class="t-role">Online Marketing Manager · School certificate @ Handelsschule KV Aarau</div>
+            <div class="t-meta">11/2021 – 07/2022 · Aarau</div>
+            <ul>
+              <li>Developed an online marketing concept for BRACK vocational training (personas, social media, email).</li>
+              <li>Completed theoretical coursework in digital/online marketing fundamentals.</li>
+            </ul>
+          </div>
 
-       <div class="t-item">
-        <div class="t-role">Mediamatician · Federal VET Diploma & Professional Maturity @ Handelsschule KV Aarau, Berufsschule Aarau</div>
-        <div class="t-meta">08/2017 – 07/2021 · Aarau</div>
-        <ul>
-          <li>Vocational training in business administration, IT, and design.</li>
-          <li>Hands-on experience in administration, digital media, and web technologies.</li>
-        </ul>
+          <div class="t-item">
+            <div class="t-role">Mediamatician · Federal VET Diploma & Professional Maturity @ Handelsschule KV Aarau, Berufsschule Aarau</div>
+            <div class="t-meta">08/2017 – 07/2021 · Aarau</div>
+            <ul>
+              <li>Vocational training in business administration, IT, and design.</li>
+              <li>Hands-on experience in administration, digital media, and web technologies.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <!-- Weitere Stationen kopieren -->
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- PROJEKTE -->
     <section id="projekte">
@@ -392,15 +382,14 @@ document updates, user support, and tool optimization.</li>
                 For <strong>BRUGG Pipes, Kleindöttingen</strong>
               </p>
               <h3>InnoCON</h3>
-              <p class="muted">Market analysis and development of recommendations for action with approaches and solutions to strengthen the competitiveness and market presence of the INDUCON pipe connection solution.</p>
+              <p class="muted">Market analysis with actionable recommendations to strengthen competitiveness and market presence of the INDUCON pipe connection solution.</p>
               <div>
                 <span class="tag">Market Research</span>
                 <span class="tag">SWOT</span>
                 <span class="tag">Competitor Analysis</span>
               </div>
               <div style="margin-top:10px">
-                <a class="btn" href="https://www.linkedin.com/posts/simon-siefermann_fhnw-wirtschaftsingenieurwesen-bruggpipes-activity-7283383144458645504-lSOv" target="_blank">View on LinkedIn</a>
-                
+                <a class="btn" href="https://www.linkedin.com/posts/simon-siefermann_fhnw-wirtschaftsingenieurwesen-bruggpipes-activity-7283383144458645504-lSOv" target="_blank" rel="noopener">View on LinkedIn</a>
               </div>
             </div>
           </article>
@@ -408,11 +397,11 @@ document updates, user support, and tool optimization.</li>
           <article class="card">
             <img src="assets/projekt3.jpg" alt="Project 3 screenshot" onerror="this.style.display='none'">
             <div class="c-body">
-               <p style="color:var(--muted); font-size:0.95rem; margin-bottom:4px;">
+              <p style="color:var(--muted); font-size:0.95rem; margin-bottom:4px;">
                 For <strong>Güdel AG, Langenthal</strong>
               </p>
               <h3>SmartLog</h3>
-              <p class="muted">AI potential analysis for core logistics processes</p>
+              <p class="muted">AI potential analysis for core logistics processes.</p>
               <div>
                 <span class="tag">Artificial Intelligence</span>
                 <span class="tag">BPMN 2.0</span>
@@ -430,13 +419,12 @@ document updates, user support, and tool optimization.</li>
         <div>
           <h2>Contact</h2>
           <p>I look forward to hearing from you or having a brief exchange.</p>
-          <p class="muted">E-mail or LinkedIn.</p>
+          <p class="muted">Email or LinkedIn.</p>
           <div class="actions" style="margin-top:8px">
-            <a class="btn primary" href="mailto:simon@siefermann.ch?subject=Kurzer%20Austausch">Send e-mail</a>
+            <a class="btn primary" href="mailto:simon@siefermann.ch?subject=Kurzer%20Austausch">Send email</a>
             <a class="btn" href="https://www.linkedin.com/in/simon-siefermann/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn" href="https://wa.me/41764509402" target="_blank" rel="noopener"> 💬 Message me on WhatsApp</a>
             <a class="btn ghost" href="tel:+41764509402">Call me on +76 450 94 02</a>
-            
           </div>
         </div>
         <div class="card" role="note" aria-label="Details">
@@ -445,9 +433,8 @@ document updates, user support, and tool optimization.</li>
             <ul>
               <li>Location: Baden, Switzerland</li>
               <li>Languages: German, English, French</li>
-              <li>Availability: One-month notice period</li>
+              <li>Availability: one-month notice</li>
             </ul>
-          
           </div>
         </div>
       </div>
@@ -508,4 +495,3 @@ document updates, user support, and tool optimization.</li>
 
 </body>
 </html>
-
